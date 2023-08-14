@@ -58,9 +58,9 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
   - Scout awards: $500 USDC (Notion: Scout fee - but usually $500 USDC)
   - (this line can be removed if there is no mitigation) Mitigation Review: XXX XXX USDC (*Opportunity goes to top 3 certified wardens based on placement in this audit.*)
 - Join [C4 Discord](https://discord.gg/code4rena) to register
-- Submit findings [using the C4 form](https://code4rena.com/contests/2023-06-shell-protocol/submit)
+- Submit findings [using the C4 form](https://code4rena.com/contests/2023-08-shell-protocol/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
-- Starts June 09, 2023 20:00 UTC
+- Starts August 21, 2023 20:00 UTC
 - Ends TBD XXX XXX XX 20:00 UTC (ex. `Ends March 30, 2023 20:00 UTC`)
 
 ## Automated Findings / Publicly Known Issues
