@@ -14,9 +14,9 @@ import {SpecifiedToken} from "../proteus/ILiquidityPoolImplementation.sol";
 
 
 /**
-   Unit Test Suite for evolving proteus this test suite includes testing and asserting all the computational variables in the contract
+   Unit Test Suite for Evolving Proteus. This test suite includes testing and asserting all the computational variables in the contract
    Note 
-     - In this test suite the internal methods are directly called without the ocean(accounting layer) hence there is try/catch used in these tests as the internal methods don't have input validation and we by-pass the public methods from where thse internal methods are called from
+     - Try/catch statments are used to call the internal methods of Proteus since there is typically input validation when called from the Ocean
      - for some price , swap aount ranges assertWithinRounding might revert with difference a bit much that is expected to be there
 */
 contract EvolvingProteusProperties is Test {
@@ -27,11 +27,11 @@ contract EvolvingProteusProperties is Test {
 
     uint256 public constant MAX_BALANCE = uint256(type(int256).max); // (2^255/10^18) // a big number
     uint256 public constant MIN_BALANCE = 10**12; //10**14; //(10^14/10^18  = 10^-4) // 0.0001
-    uint256 public constant MIN_OPERATING_AMOUNT = 2 * 10**8; //(2 * 10^-10) // the min amount you can submit to a trade? maybe?
+    uint256 public constant MIN_OPERATING_AMOUNT = 2 * 10**8; //(2 * 10^-10) // the min amount you can specify
     uint256 private constant MAX_BALANCE_AMOUNT_RATIO = 10**11; // the maximum difference between the x and y  balances
     int256 public constant MAX_CHANGE_FACTOR = 10; // the maximum amount the utility or the balance of individual tokens can change in one transaction
-    int256 constant BASE_FEE = 800; // base fee
-    int256 constant FIXED_FEE = 10**9; // rounding fee? idk
+    int256 constant BASE_FEE = 800;
+    int256 constant FIXED_FEE = 10**9; 
     uint256 constant T_GRANULARITY = 10 seconds;
     uint256 constant T_DURATION = 12 hours;
     
@@ -52,10 +52,10 @@ contract EvolvingProteusProperties is Test {
     function setUp() public {
        // some price ranges we have tested with
        // x constant y increases
-       py_init_val = 6951000000000000;
-       px_init_val = 69510000000000;
-       py_final_val = 695100000000000000;
-       px_final_val = 69510000000000;
+       // py_init_val = 6951000000000000;
+       // px_init_val = 69510000000000;
+       // py_final_val = 695100000000000000;
+       // px_final_val = 69510000000000;
 
        // x constant y decreases
        // py_init_val = 6951000000000000;
@@ -82,10 +82,10 @@ contract EvolvingProteusProperties is Test {
        // px_final_val = 6951000000000;
 
        // x & y both increase
-    //    py_init_val = 6951000000000000;
-    //    px_init_val = 69510000000000;
-    //    py_final_val = 695100000000000000;
-    //    px_final_val = 695100000000000;
+       py_init_val = 6951000000000000;
+       px_init_val = 69510000000000;
+       py_final_val = 695100000000000000;
+       px_final_val = 695100000000000;
 
 
        py_init = ABDKMath64x64.divu(py_init_val, 1e18);
@@ -113,7 +113,7 @@ contract EvolvingProteusProperties is Test {
       uint128 px_final) 
       public {
         
-        // since we use abdk math for transforming the params that we set to handle precsision and hence we limit this test to inputs <= 1e18
+        // Assume prices are between 0 and 1
         vm.assume(py_init > 0 && py_init <= 1e18);
         vm.assume(px_init > 0 && px_init <= 1e18);
         vm.assume(py_final > 0 && py_final <= 1e18);
@@ -1019,5 +1019,4 @@ contract EvolvingProteusProperties is Test {
         assertLe((a0) - (a0 / BASE_FEE) - FIXED_FEE, a1, "not within less than rounding");
         assertGe((a0) + (a0 / BASE_FEE) + FIXED_FEE, a1, "not within greater than rounding");
     }
-
-}  
+}

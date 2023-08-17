@@ -9,34 +9,35 @@ import "..//EvolvingInstrumentedProteus.sol";
 import "../../proteus/LiquidityPoolProxy.sol";
 
 /**
-   Fork Test Suite for evolving proteus to test reverse swaps on each asset in a  pool, multiple swaps, deposits & withdrawals over time
-   Here are the invariants associated with Evolving Proteus and we have tested
-   1. the difference in pool token balances after a swap is same as the difference user after and before balance considering the fee
-   2. utility & utility/lp does not decrease after swap
-   3. For a deposit, utility will always increase, but util/lp does not decrease
-   4. For a withdraw, utility will always decrease, but util/lp does not decrease
-   The following invariants are soft invariants that apply for a reverse swap scenario(see tests below) and might not hold true when the user is expected to make profit at the end of the reverse swap
-   5. when x price decreases over time & y price stays constant
-   5.1 when x is swapped at t0  user x bal after swap => user x bal before swap & pool x bal before swap => pool x bal after swap
-   5.2 when y is swapped at t0  user y bal after swap <= user y bal before swap & pool y bal before swap <= pool y bal after swap
-   6. when x price increases over time & y price stays constant
-   6.1 when x is swapped at t0  user x bal after swap <= user x bal before swap & pool x bal before swap <= pool x bal after swap
-   6.2 when y is swapped at t0  user y bal after swap => user y bal before swap & pool y bal before swap => pool y bal after swap
-   7. when y price decreases over time & x price stays constant
-   7.1 when x is swapped at t0 user x bal after swap => user x bal before swap & pool x bal before swap >= pool x bal after swap
-   7.2 when y is swapped at t0 user y bal after swap <= user y bal before swap & pool y bal before swap <= pool y bal after swap
-   8. when y price increases over time & x price stays constant
-   8.1 when x is swapped at t0 user x bal after swap <= user x bal before swap & pool x bal before swap <= pool x bal after swap
-   8.2 when y is swapped at t0 user y bal after swap => user y bal before swap & pool y bal before swap => pool y bal after swap
-   9. when x & y prices both increase with time
-   9.1 when x is swapped at t0 user x bal after swap <= user x bal before swap & pool x bal before swap <= pool x bal after swap
-   9.2 when y is swapped at t0 user y bal after swap => user y bal before swap & pool y bal before swap => pool y bal after swap
-   10. when x & y prices both decrease with time
-   10.1 when x is swapped at t0 user x bal after swap >= user x bal before swap & pool x bal before swap >= pool x bal after swap
-   10.2 when y is swapped at t0 user y bal after swap <= user y bal before swap & pool y bal before swap <= pool y bal after swap
-   11. when x & y prices both stay constant
-   11.1 when x is swapped at t0 user x bal after swap <= user x bal before swap & pool x bal before swap <= pool x bal after swap
-   11.2 when y is swapped at t0 user y bal after swap <= user y bal before swap & pool y bal before swap <= pool y bal after swap
+   Fork Test Suite for Evolving Proteus to test back and forth swaps on each asset in a pool, multiple swaps, and deposits/withdrawals over time
+   Invariants tested:
+   1. The differences in pool token balances after a swap is same as the differences in user token balances after factoring in the fee
+   2. Utility & utility/lp token supply does not decrease after swap
+   3. For a deposit, utility will always increase, and util/lp does not decrease
+   4. For a withdraw, utility will always decrease, and util/lp does not decrease
+
+   The following invariants are soft invariants that apply for a back and forth swap scenarios (see tests below) and might not hold true when the user is expected to make profit at the end
+    5. x price decreases over time & y price stays constant
+      - when x is swapped at t0 user x bal after swap >= user x bal before swap & pool x bal before swap >= pool x bal after swap
+      - when y is swapped at t0 user y bal after swap <= user y bal before swap & pool y bal before swap <= pool y bal after swap
+    6. when x price increases over time & y price stays constant
+      - when x is swapped at t0  user x bal after swap <= user x bal before swap & pool x bal before swap <= pool x bal after swap
+      - when y is swapped at t0  user y bal after swap >= user y bal before swap & pool y bal before swap >= pool y bal after swap
+    7. when y price decreases over time & x price stays constant
+      - when x is swapped at t0 user x bal after swap >= user x bal before swap & pool x bal before swap >= pool x bal after swap
+      - when y is swapped at t0 user y bal after swap <= user y bal before swap & pool y bal before swap <= pool y bal after swap
+    8. when y price increases over time & x price stays constant
+      - when x is swapped at t0 user x bal after swap <= user x bal before swap & pool x bal before swap <= pool x bal after swap
+      - when y is swapped at t0 user y bal after swap >= user y bal before swap & pool y bal before swap >= pool y bal after swap
+    9. when x & y prices both increase with time
+      - when x is swapped at t0 user x bal after swap <= user x bal before swap & pool x bal before swap <= pool x bal after swap
+      - when y is swapped at t0 user y bal after swap >= user y bal before swap & pool y bal before swap >= pool y bal after swap
+    10. when x & y prices both decrease with time
+      - when x is swapped at t0 user x bal after swap >= user x bal before swap & pool x bal before swap >= pool x bal after swap
+      - when y is swapped at t0 user y bal after swap <= user y bal before swap & pool y bal before swap <= pool y bal after swap
+    11. when x & y prices both stay constant
+      - when x is swapped at t0 user x bal after swap <= user x bal before swap & pool x bal before swap <= pool x bal after swap
+      - when y is swapped at t0 user y bal after swap <= user y bal before swap & pool y bal before swap <= pool y bal after swap
 */
 contract ForkEvolvingProteus is Test {
   using ABDKMath64x64 for uint256;
@@ -88,12 +89,11 @@ contract ForkEvolvingProteus is Test {
     
     // Note 
     /** 
-      - Tests might fail due to a incompatible relation b/w the prices & the swap/deposit/withdrawal amounts or the initial pool balances set in the setup method, this is a known thing i.e if the prices for a pool are high then the initial pool balances might need to be increased a bit too, the swap amounts might need to be higher too to avoid any bonding curve voilation checks we have in the contract (see the custom errors in the contract)
-      - Some invariants for the reverse swap tests might fail because of the fee so instead of user making money the pool makes money in some of those cases at the end of the reverse this is a known behaviour
-      - since we can't exactly predict the behavior when both x & y prices mov e in opposite directions hence we don't test those scenario's and consider that out of scope
-      - for high price values & swap amount ranges assertWithinRounding check in the tests for utility after a swap might revert in case when utility increases after the swap ore then the expectation
-      - the current initial pool balance amounts, swap amounts work only for the small price values, so as explained above if you use large or extremely large values you'll need to increase the pool initial balance and swap amounts gradually depending on the price value you use
-        for eg with all the extremely large values for different scenarios the recommended x and y balances when setting up the pool is 1e29 & 1e33 (in wei) and swap amounts if y is swapped it should be close to 1e32 and if x is swapped first thnn it should be 1e24 
+      - At extreme edges of the bonding curve, precision issues may be encountered if using relatively small values for pool balances or specified amounts.
+      - After a back and forth swap, some invariants may fail due to the swap fee when the pool makes money instead of the user making money
+      - The assertWithinRounding check for utility may sometimes fail if using high price values and swap amounts since the utlility increases more than expected
+      - Behavior when x and y prices are moving in opposite directions has not been tested and is considered out of scope.
+      - Issues may occur if the pool balances, prices, and swap amounts are wildly different in their magnitudes. They should be scaled accordingly to test with different values.
     */
 
     // Different price ranges that are used for testing
