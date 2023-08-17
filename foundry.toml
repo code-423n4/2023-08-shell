@@ -1,0 +1,16 @@
+[profile.default]
+src = 'src'
+out = 'out'
+libs = ['lib']
+remappings = [
+  'ds-test/=lib/ds-test/src/',
+  '@openzeppelin=node_modules/@openzeppelin',
+  'abdk-libraries-solidity=node_modules/abdk-libraries-solidity'
+]
+solc_version = "0.8.10"
+[fuzz]
+runs = 1000
+max_test_rejects = 4294967295
+
+# See more config options https://github.com/gakonst/foundry/tree/master/config
+

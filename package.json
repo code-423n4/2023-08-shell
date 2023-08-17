@@ -1,0 +1,30 @@
+{
+  "name": "shell-v2-ocean",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cowri/shell-protocol-v2-contracts"
+  },
+  "version": "1.0.0",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.1.1",
+    "@nomiclabs/hardhat-etherscan": "^3.1.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "@openzeppelin/contracts": "^4.7.3",
+    "abdk-libraries-solidity": "^3.0.0",
+    "chai": "^4.3.6",
+    "ethereum-waffle": "^3.4.4",
+    "ethers": "^5.7.0",
+    "hardhat": "^2.10.2",
+    "prettier": "^2.7.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.24",
+    "solidity-coverage": "^0.8.2",
+    "toml": "^3.0.0"
+  },
+  "scripts": {
+    "gas-costs": "npx hardhat test test-gas/GasCost.js",
+    "coverage": "npx hardhat coverage --testfiles 'test/**'"
+  },
+  "dependencies": {
+    "libusb": "^0.0.0-pre"
+  }
+}
