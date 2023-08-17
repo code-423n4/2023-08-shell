@@ -151,7 +151,7 @@ Note: when the min and max prices are evolving in opposite directions, we are un
   * BalanceError
 * Utility per LP token decreases between timeslices
 * Failure on try/catch unit tests
-* Failure of soft invariants (see above), Failure of soft invariants (see above), especially those where the user is expected to net more tokens than they started with, but don’t.
+* Failure of soft invariants (see above), especially those where the user is expected to net more tokens than they started with, but don’t.
 
 
 ## Architecture
