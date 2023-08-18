@@ -145,6 +145,7 @@ Note: when the min and max prices are evolving in opposite directions, we are un
 
 * Errors already described
   * Failure when deploying a pool with incorrect prices (see above)
+  * any findings around "permissionless" deployment, although contract deployment is permissionless but in the near/distant future only the shell team will deploy this contract
   * BoundaryError
   * AmountError
   * CurveError
