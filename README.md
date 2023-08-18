@@ -192,10 +192,9 @@ Evolving Proteus has 6 methods that are called via the ocean:
 - Is it an NFT?: 
 - Does it have an AMM?:   True
 - Is it a fork of a popular project?: False
-- Does it use rollups?:   
-- Is it multi-chain?:  
-- Does it use a side-chain?: false
+- Which blockchains will this code be deployed to, and are considered in scope for this audit?: Arbitrum
 - Areas to focus on/break: main areas would be if the computation logic of the primitive can be broken and taken advantage of terms of swaps, deposits & withdrawals or any scenario in terms of the computation where funds get stuck etc
+- In the event of a DOS, could you outline a minimum duration after which you would consider a finding to be valid? This question is asked in the context of most systems' capacity to handle DoS attacks gracefully for a certain period: 1-2 days
 ```
 
 ## Testing
