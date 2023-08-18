@@ -174,7 +174,7 @@ Evolving Proteus has 6 methods that are called via the ocean:
 
 ## Scoping Details 
 ```
-- If you have a public code repo, please share it here:  
+- If you have a public code repo, please share it here:  https://github.com/Shell-Protocol/Shell-Protocol
 - How many contracts are in scope?:  1 
 - Total SLoC for these contracts?:  458
 - How many external imports are there?: 1  
