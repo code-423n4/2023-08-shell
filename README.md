@@ -20,6 +20,20 @@ Automated findings output for the audit can be found [here](https://github.com/c
 
 *Note for C4 wardens: Anything included in the automated findings output is considered a publicly known issue and is ineligible for awards.*
 
+### Known behaviors which are out of scope for the audit(automated findings / publicly known issues)
+
+* Errors already described
+  * Failure when deploying a pool with incorrect prices (see above)
+  * any findings around "permissionless" deployment, although contract deployment is permissionless but in the near/distant future only the shell team will deploy this contract
+  * BoundaryError
+  * AmountError
+  * CurveError
+  * BalanceError
+* Utility per LP token decreases between timeslices
+* Failure on try/catch unit tests
+* Failure of soft invariants (see above), especially those where the user is expected to net more tokens than they started with, but don’t.
+
+
 # Scope
 
 
@@ -147,19 +161,6 @@ These invariants concern the behavior of the pool between timeslices. What happe
 
 Note: when the min and max prices are evolving in opposite directions, we are unable to specify the expected behavior. The user executing the swap can either end up with more or fewer tokens than they started with.
 
-## Known behaviors which are out of scope for the audit(automated findings / publicly known issues)
-
-* Errors already described
-  * Failure when deploying a pool with incorrect prices (see above)
-  * any findings around "permissionless" deployment, although contract deployment is permissionless but in the near/distant future only the shell team will deploy this contract
-  * BoundaryError
-  * AmountError
-  * CurveError
-  * BalanceError
-* Utility per LP token decreases between timeslices
-* Failure on try/catch unit tests
-* Failure of soft invariants (see above), especially those where the user is expected to net more tokens than they started with, but don’t.
-
 
 ## Architecture
 All interactions of the user with the user with the evolving proteus contract happen through the **Ocean** which is our accounting layer, the ocean related contracts are out of scope for this audit but you can find more details [here](https://wiki.shellprotocol.io/how-shell-works/the-ocean-accounting-hub)
@@ -191,10 +192,9 @@ Evolving Proteus has 6 methods that are called via the ocean:
 - Is it an NFT?: 
 - Does it have an AMM?:   True
 - Is it a fork of a popular project?: False
-- Does it use rollups?:   
-- Is it multi-chain?:  
-- Does it use a side-chain?: false
+- Which blockchains will this code be deployed to, and are considered in scope for this audit?: Arbitrum
 - Areas to focus on/break: main areas would be if the computation logic of the primitive can be broken and taken advantage of terms of swaps, deposits & withdrawals or any scenario in terms of the computation where funds get stuck etc
+- In the event of a DOS, could you outline a minimum duration after which you would consider a finding to be valid? This question is asked in the context of most systems' capacity to handle DoS attacks gracefully for a certain period: 1-2 days
 ```
 
 ## Testing
@@ -215,10 +215,6 @@ forge test
 ```shell
 forge coverage
 ```
-
-<img width="983" alt="Screenshot 2023-08-17 at 9 07 41 PM" src="https://github.com/cowri/shell-protocol-v2-contracts/assets/26670962/18f84132-9d41-48dd-9d8b-f899cbb6cd3f">
-<br>
-<img width="1022" alt="Screenshot 2023-08-17 at 9 05 36 PM" src="https://github.com/cowri/shell-protocol-v2-contracts/assets/26670962/fd7c3302-ccb5-4109-ba20-a6b31fb0cd42">
 
 
 ## Static Analysis
