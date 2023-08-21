@@ -29,9 +29,9 @@ Automated findings output for the audit can be found [here](https://github.com/c
   * AmountError
   * CurveError
   * BalanceError
-* Utility per LP token decreases between timeslices
-* Failure on try/catch unit tests
-* Failure of soft invariants (see above), especially those where the user is expected to net more tokens than they started with, but don’t.
+  * Utility per LP token decreases between timeslices
+  * Failure on try/catch unit tests
+  * Failure of soft invariants (see above), especially those where the user is expected to net more tokens than they started with, but don’t.
 
 
 # Scope
@@ -214,6 +214,8 @@ forge test
 ## Coverage
 ```shell
 forge coverage
+
+Only check coverage for EvolvingProteus.sol
 ```
 
 
