@@ -1,13 +1,13 @@
 # Shell Protocol audit details
-- Total Prize Pool: $36,500 USDC (Notion: Total award pool)
-  - HM awards: $24,750 USDC (Notion: HM (main) pool)
-  - Analysis awards: $1,500 USDC (Notion: Analysis pool)
-  - QA awards: $750 USDC (Notion: QA pool)
-  - Bot Race awards: $2,250 USDC (Notion: Bot Race pool)
-  - Gas awards: $750 USDC (Notion: Gas pool)
-  - Judge awards: $3,600 USDC (Notion: Judge Fee)
-  - Lookout awards: $2,400 USDC (Notion: Sum of Pre-sort fee + Pre-sort early bonus)
-  - Scout awards: $500 USDC (Notion: Scout fee - but usually $500 USDC)
+- Total Prize Pool: $36,500 USDC 
+  - HM awards: $24,750 USDC 
+  - Analysis awards: $1,500 USDC 
+  - QA awards: $750 USDC 
+  - Bot Race awards: $2,250 USDC 
+  - Gas awards: $750 USDC 
+  - Judge awards: $3,600 USDC 
+  - Lookout awards: $2,400 USDC 
+  - Scout awards: $500 USDC 
 - Join [C4 Discord](https://discord.gg/code4rena) to register
 - Submit findings [using the C4 form](https://code4rena.com/contests/2023-08-shell-protocol/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
