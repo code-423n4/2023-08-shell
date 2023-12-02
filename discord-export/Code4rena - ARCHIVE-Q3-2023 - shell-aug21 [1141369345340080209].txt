@@ -1,0 +1,1880 @@
+==============================================================
+Guild: Code4rena
+Channel: ARCHIVE-Q3-2023 / shell-aug21
+==============================================================
+
+[08/16/2023 15:12] kartoonjoy (pinned)
+👋 Hello and welcome to the audit channel for the $36,500 USDC **Shell Protocol** audit!
+
+📆 Audit opens 08/21/2023 20:00 (20:00 UTC) and runs through 08/28/2023 20:00 (20:00 UTC) (7 days).
+
+Please give a warm welcome to the Shell Protocol team, particularly @Viraz, @Ish, @Kenny, who will be available for questions either here in the channel or via DM in the US, EU, and Asian timezones timezone(s).
+
+We'll be posting relevant links, documentation, etc. here, so if you intend to participate in this audit, consider enabling notifications for this channel. 🐺 ⏰
+
+Audit Page: https://code4rena.com/contests/2023-08-shell-protocol#top
+
+{Embed}
+https://code4rena.com/contests/2023-08-shell-protocol
+Code4rena
+Code4rena is a competitive audit platform that finds more high-severity vulnerabilities, more quickly than any other auditing method.
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/c4-og-banner-3A5AF.png
+
+{Reactions}
+🔥 (7) 🫡 (4) 
+
+[08/16/2023 15:13] kartoonjoy
+Pinned a message.
+
+
+[08/18/2023 11:07] 0xprinc
+@Viraz, @Ish, @Kenny
+
+
+[08/18/2023 11:08] 0xprinc
+What are the resources we have to read to get the context of in-scope contracts
+
+
+[08/18/2023 14:18] viraz4331
+All the details are mentioned in the audit repo which would be open sourced on mon
+
+I'll try and share a doc with some details though meanwhile
+
+
+[08/18/2023 15:56] viraz4331
+the readme of the audit repo with all relevant info will be made public on mon
+
+
+[08/18/2023 19:03] 0xose
+Will you be sharing the doc before monday!?
+
+
+[08/18/2023 19:14] kartoonjoy
+The doc will be made available at launch
+
+{Reactions}
+👍 
+
+[08/19/2023 07:37] viraz4331
+Yeah all Info is in the readme and it'll be open sourced on mon
+
+{Reactions}
+👍 (3) 
+
+[08/21/2023 20:35] rafaelnicolau.eth
+I'm having issues with the dependencies while building the code, is someone experiencing the same?
+
+{Reactions}
+hi5 
+
+[08/21/2023 20:35] mrpotatomagic
+run yarn install before running forge build, should solve the issue
+
+
+[08/21/2023 20:39] rafaelnicolau.eth
+Thank you, issues solved.
+
+{Reactions}
+👍 
+
+[08/21/2023 20:50] Matt++#2677
+Used install and forge build both worked, ran f orge test and is anyone else getting a fail on the testEdgeSwapsOverT test?  Trying to see if I did something incorrectly
+
+{Reactions}
+👍 
+
+[08/21/2023 20:52] rafaelnicolau.eth
+I'm also getting the same error on that same test.
+
+
+[08/21/2023 20:53] Matt++#2677
+Sweet thanks
+
+
+[08/21/2023 20:55] Matt++#2677
+@kartoonjoy My first time posting in here and only my second audit, I know I can't say certain things publicly for a live audit so can I dm a few questions? Or anyone from C4 team
+
+
+[08/21/2023 21:08] mrpotatomagic
+All tests are passing for me including the one you mentioned
+
+
+[08/21/2023 21:17] Matt++#2677
+I'll try on my virtual machine prob someting weird in my vscode. Is there a list of what I can and can't ask in these channels? I saw someone ask something specific to a bug and got a warning about potentially being banned so wanted to be careful
+
+
+[08/21/2023 21:19] mrpotatomagic
+general questions related to understanding of protocol can be asked here, if you think there is a possible bug you've found and want more clarity on something then dm the sponsor
+
+
+[08/21/2023 21:20] Matt++#2677
+okay sweet makes sense, just understanding here. Specific stuff in DM. thank you.
+
+{Reactions}
+👍 
+
+[08/21/2023 22:20] p_crypt0
+How are MAX_PRICE_VALUE and MIN_PRICE_VALUE derived and what is the intent in their use in bounding init and final prices?
+
+
+[08/21/2023 22:56] mahdi9606
+it seems EvolvingProteus only contains view functions and used for calculation of another contract which is not in scope
+
+
+[08/22/2023 03:00] 0xaxe
+Hey mates,I'm somewhat uncertain about the scope of the audit. Is the audit scope limited to just one contract for this contest? For example, is it limited to the "EvolvingProteus.sol" contract located at "src/proteus/EvolvingProteus.sol"?
+
+
+[08/22/2023 03:11] viraz4331
+That's based on the algorithm design and our testing results
+
+The min and Max values are 10^8 and 10 ^ -8 we then convert it using abdk math
+
+
+[08/22/2023 03:11] viraz4331
+All info is mentioned in the readme code comments
+
+
+[08/22/2023 03:12] viraz4331
+Yes
+
+
+[08/22/2023 03:12] viraz4331
+It only does computation, the other contract which calls the evolving proteus contract has already been audited before
+
+
+[08/22/2023 03:14] viraz4331
+Are u still getting the issue ?
+
+
+[08/22/2023 03:33] Matt++#2677
+Yeah it’s just that one test that keeps failing for some reason
+
+
+[08/22/2023 03:38] 0xaxe
+Thanks mate 🫶
+
+
+[08/22/2023 03:40] viraz4331
+Can you DM me the price values you're passing in
+
+
+[08/22/2023 03:42] Matt++#2677
+yeah lemme try one more thing, going to fresh install repo and dependancies then if that doesn't work I'll bug you further
+
+
+[08/22/2023 03:43] viraz4331
+also that test might be failing due to prices being near extreme point of the curve and would be out of scope as mentioned in readme just a background on a potential cause
+
+
+[08/22/2023 03:43] viraz4331
+Yeah thanks
+
+
+[08/22/2023 04:54] tamayonft
+I installed the dependencies with foundry and all test are passed
+
+
+[08/22/2023 04:54] grandfather042
+so have the same issue with  the testEdgeSwapsOverT
+
+
+[08/22/2023 04:55] grandfather042
+so for me it's 39 pass and 1 failing 🙂
+
+
+[08/22/2023 04:55] tamayonft
+Try to install dependencies with foundry and adjust the remappings and all the test pass
+
+{Reactions}
+👍 
+
+[08/22/2023 04:55] grandfather042
+thanks
+
+
+[08/22/2023 05:01] viraz4331
+Did you change anything in the unit test file where it fails
+
+
+[08/22/2023 05:06] grandfather042
+no, just run forge update and it works now
+
+
+[08/22/2023 05:06] grandfather042
+40/40
+
+
+[08/22/2023 05:06] Matt++#2677
+I uninstalled all and reinstalled and it worked
+
+
+[08/22/2023 05:06] Matt++#2677
+forge update didn't work I tried that first
+
+
+[08/22/2023 05:06] Matt++#2677
+sounds like that test is just finnicky for some reason
+
+
+[08/22/2023 05:12] viraz4331
+yeah it can be ignored it's just a extra very very edge case scenario we added
+
+{Reactions}
+👍 
+
+[08/22/2023 09:50] praise95
+@Viraz boss pls i sent you a fr
+
+{Reactions}
+👍 
+
+[08/22/2023 10:27] 0xlgtm
+Hi @Viraz @Ish @Kenny , can you explain why there is an initial / final min and max price? I'm trying to understand why the prices of the x and y tokens are decoupled instead of being the inverse of each other.
+
+
+[08/22/2023 10:28] 0xlgtm
+Also, how can I use the ABDK library to calculate the same value for MAX_PRICE_VALUE and MIN_PRICE_VALUE?
+
+
+[08/22/2023 10:30] viraz4331
+hey,
+thanks so this is based on the algorithm being used more details here https://github.com/code-423n4/2023-08-shell/blob/main/README.md#how-does-the-algorithm-work
+
+the `x_init` price in the code is the  the minimum price at the initial block
+the `y_init` price in the code is the  the max price at the initial block
+the `y_final` price in the code is the  the max price at the final block
+the `x_final` price in the code is the  the min price at the initial block
+
+
+[08/22/2023 10:31] viraz4331
+@Kenny can you too provide your insights on this too
+
+
+[08/22/2023 10:33] viraz4331
+same like here
+so 
+```
+MIN_PRICE_VALUE = ABDKMath64x64.divu(10^12, 1e18);
+MAX_PRICE_VALUE = ABDKMath64x64.divu(10^26, 1e18);
+```
+
+{Reactions}
+👍 
+
+[08/22/2023 11:14] grandfather042
+can someone explain this?  // at all times x price should be less than y price
+        if (py_init <= px_init) revert InvalidPrice();
+        if (py_final <= px_final) revert InvalidPrice(); How can I add two stablecoin in this case?
+
+
+[08/22/2023 11:26] viraz4331
+please go through this https://github.com/code-423n4/2023-08-shell#key-terminology
+we won't be using it for stable pools actually since for stable coins concentrated liquidity doesn't need to evolve over time
+
+so we use static proteus which is already live for stable pools
+
+{Reactions}
+👍 
+
+[08/22/2023 12:03] 0xlgtm
+Do you have an explainer video to walk through this algorithm?
+
+
+[08/22/2023 12:03] 0xlgtm
+At a high level, I understand how it works but I can't quite wrap my head around the 4 different prices.
+
+
+[08/22/2023 12:04] viraz4331
+No unfortunately we don't have a video yet
+@Kenny can you have a go too
+
+
+[08/22/2023 12:05] viraz4331
+This is the idea basically
+https://discord.com/channels/810916927919620096/1141369345340080209/1143492421422940160
+
+
+[08/22/2023 12:08] viraz4331
+I have tagged in our founder who designed the algo so once he is up he would explain it better
+
+{Reactions}
+🤝 
+
+[08/22/2023 12:09] 0xlgtm
+Thank you!
+
+
+[08/22/2023 12:26] viraz4331
+I'll give another go
+
+The 4 prices are the max and min prices for both assets at the start and at the end and then over time depending on how the prices are set the curve evolves accordingly
+
+
+[08/22/2023 12:33] grandfather042
+and the price is calculated for each block, right?
+
+
+[08/22/2023 12:34] viraz4331
+Yes it varies every block until the final block depending on the duration of the curve evolution is reached
+
+{Reactions}
+👍 
+
+[08/22/2023 13:43] castle_chain
+hey @Viraz , can you explain what do a,b represent ?
+
+
+[08/22/2023 13:44] castle_chain
+And when you mention the price here , the price is for which token ?
+
+
+[08/22/2023 13:44] viraz4331
+It can be any two tokens 
+Check here https://github.com/code-423n4/2023-08-shell#key-terminology
+
+{Embed}
+https://github.com/code-423n4/2023-08-shell
+GitHub - code-423n4/2023-08-shell
+Contribute to code-423n4/2023-08-shell development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/22717aa2-f924-4cf5-a220-df36aad687fd-C72B8
+
+
+[08/22/2023 13:45] tamayonft
+The contract doesn't have fuzzing testing?
+
+
+[08/22/2023 13:46] viraz4331
+They are part of the curve eq
+https://github.com/code-423n4/2023-08-shell/blob/main/src/proteus/EvolvingProteus.sol#L115
+
+{Embed}
+https://github.com/code-423n4/2023-08-shell/blob/main/src/proteus/EvolvingProteus.sol
+2023-08-shell/src/proteus/EvolvingProteus.sol at main · code-423n4/...
+Contribute to code-423n4/2023-08-shell development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/22717aa2-f924-4cf5-a220-df36aad687fd-C72B8
+
+
+[08/22/2023 13:46] viraz4331
+All tests are fuzz tests only thing is we don't use the keyword fuzz in the function name
+
+Each foundry test function which takes args is a fuzz test
+
+
+[08/22/2023 13:51] castle_chain
+ok , I need to understand the py and the px can be represent by a curve (relation ) between what ? time and price , or the two reserves of the two tokens ?? @Viraz
+
+
+[08/22/2023 13:54] viraz4331
+It's a representation of the bonding curve evolution over a period of time kinda like how dutch auction works but for amm's and ofc involving 2 assets
+
+
+[08/22/2023 14:22] viraz4331
+did I manage to clear your doubt ?
+
+{Reactions}
+👍 
+
+[08/22/2023 14:39] plamkata
+@Viraz @Ish @Kenny I can't seem to understand the utility parameter
+
+
+[08/22/2023 14:40] plamkata
+In order to composite all the smaller functions into a single curve you use the utility multiplied by a kappa in order to connect the curves into 1 composite
+
+
+[08/22/2023 14:40] plamkata
+But what does utility on it's own without the kappa represent
+
+
+[08/22/2023 15:05] viraz4331
+It's the measure of the value of the liquidity in the pool for lp's to calculate yield for lp's
+
+
+[08/22/2023 15:06] plamkata
+To avoid using token reserves, you introduce a third measure?
+
+
+[08/22/2023 15:07] castle_chain
+@Viraz  why the price ratio calculated like this , why do not divide the py over px ?
+
+
+[08/22/2023 15:07] castle_chain
+https://github.com/code-423n4/2023-08-shell/blob/3710196ff36f90e588e05588546aaabb0e941cf4/src/proteus/EvolvingProteus.sol#L259-L260
+
+{Embed}
+https://github.com/code-423n4/2023-08-shell/blob/3710196ff36f90e588e05588546aaabb0e941cf4/src/proteus/EvolvingProteus.sol
+2023-08-shell/src/proteus/EvolvingProteus.sol at 3710196ff36f90e588...
+Contribute to code-423n4/2023-08-shell development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/22717aa2-f924-4cf5-a220-df36aad687fd-C72B8
+
+
+[08/22/2023 15:08] viraz4331
+Yeah that's part of our algorithm we have a static proteus pool which also uses utility
+
+
+[08/22/2023 15:09] plamkata
+What were the a and b values exactly representative of, I am trying to understand the ``_getUtility``
+
+
+[08/22/2023 15:10] plamkata
+I can imagine the equations but I just forgot and got lost searching for it
+
+
+[08/22/2023 15:11] viraz4331
+That's a question for @Kenny 
+afaik we do it this way to take into account the max distance on the curve between y and x
+
+
+[08/22/2023 15:11] viraz4331
+https://github.com/code-423n4/2023-08-shell/blob/main/src/proteus/EvolvingProteus.sol#L115
+
+{Embed}
+https://github.com/code-423n4/2023-08-shell/blob/main/src/proteus/EvolvingProteus.sol
+2023-08-shell/src/proteus/EvolvingProteus.sol at main · code-423n4/...
+Contribute to code-423n4/2023-08-shell development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/22717aa2-f924-4cf5-a220-df36aad687fd-C72B8
+
+
+[08/22/2023 15:11] viraz4331
+Derived by px and py
+
+
+[08/22/2023 15:54] carrotsmuggler
+@Viraz sent a dm
+
+
+[08/22/2023 16:04] viraz4331
+haven't received yet
+
+
+[08/22/2023 16:06] viraz4331
+responded
+
+
+[08/22/2023 17:12] .satyam_
+@Viraz dme'd
+
+
+[08/22/2023 17:33] viraz4331 (pinned)
+hey guys,
+there is typo in the comment here https://github.com/code-423n4/2023-08-shell/tree/main/src/proteus#L120
+it should be `Calculates the b variable in the curve eq which is basically a sq. root of the of x instantaneous price` thanks @Satyam_Sharma for pointing out
+
+{Reactions}
+👍 
+
+[08/22/2023 17:35] lsaudit
+@Viraz  hey, I've sent you DM, please take a look at your spare time 🙂
+
+{Reactions}
+👍 
+
+[08/22/2023 17:55] peterchou
+Is there any specific part of the contract - any function, logic, flow etc. that you think has the potential to cause issues and should get more attention?
+
+
+[08/22/2023 18:03] viraz4331
+not really the whole of evolving proteus contract is critical since it is responsible for the amm related computations
+
+
+[08/22/2023 18:10] k736
+Utility is basically the AMM’s invariant. Before and after every swap, utility should remain constant. It is basically how the pool measures value internally. 
+
+a and b are parameters that determine the pools utility function. Another way to say this is that a and b determine the shape of the bonding curve. 
+
+I should emphasize that utility can increase or decrease after a deposit or withdrawal. But the utility/LP token should never decrease. 
+
+Lastly, while the AMM is evolving, the utility will change between blocks. The utility invariant refers to transactions within the same block.
+
+
+[08/22/2023 18:11] plamkata
+Yeah I was gonna ask what it is initially but it is just a and b
+
+
+[08/22/2023 18:11] k736
+A and b are parameters used to calculate utility
+
+
+[08/22/2023 18:12] plamkata
+Yeah and they are calculated based on the py and px
+
+
+[08/22/2023 18:14] Message Wolf#0225 (pinned)
+**Automated Findings / Publicly Known Issues**
+
+Automated findings output for the audit can be found [here](https://gist.github.com/code423n4/ae96f6f8d2dd6eb71d2cc84c85cfac91).
+
+*Note for C4 wardens: Anything included in the automated findings output is considered a publicly known issue and is ineligible for awards.*
+
+
+[08/22/2023 18:16] k736
+Correct. The py and px parameters refer to the maximum price quoted by the AMM and the minimum price quoted. It’s a bit like the price range in Uniswap v3.
+
+
+[08/22/2023 18:21] kartoonjoy
+Pinned a message.
+
+
+[08/22/2023 18:52] castle_chain
+@Kenny in the first white paper : " The utility of the pool at P0 is the Euclidean distance,d, from the origin to P∗ ." , so in this example :https://shell-protocol.notion.site/Proteus-AMM-Engine-Update-3-7f33b7e1561347b696874a8ba02b9782#:~:text=In%20qualitative%20terms,and%202%20respectively. , how do the purple and the orange segments have the same utility and not the same scale vector ?
+
+{Embed}
+https://shell-protocol.notion.site/Proteus-AMM-Engine-Update-3-7f33b7e1561347b696874a8ba02b9782
+Proteus AMM Engine: Update #3
+Introduction
+
+
+[08/22/2023 18:58] castle_chain
+and in the prev example I need to know which curve is the identity curve the above or the below one ?
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/Screenshot_from_2023-08-22_21-57-30-B435A.png
+
+
+[08/22/2023 18:58] castle_chain
+@Kenny @Viraz
+
+
+[08/22/2023 18:59] mike_bello90
+Hi Viraz send you a FR 😀
+
+
+[08/22/2023 18:59] viraz4331
+this isn't the whitepaper for evolving proteus just a  fyi 
+and probably @Kenny would be the best person to answer ur second ques
+
+
+[08/22/2023 19:00] k736
+Identity curves are the smaller curves, closer to the origin. Their size does not change. We scale the identity curves to the size of the pool to get the “regular” bonding curve.
+
+{Reactions}
+👍 
+
+[08/22/2023 19:01] castle_chain
+my first question is related to the update 3 not the first white paper
+
+
+[08/22/2023 19:02] castle_chain
+how do the purple and the orange segments have the same utility and not the same scale vector ? @Kenny what about this ?
+
+
+[08/22/2023 19:02] viraz4331
+yeah update 3 too is about static proteus which is already live and not evolving proteus
+
+
+[08/22/2023 19:03] k736
+Utility is a measure of value in the pool and must be the same for every segment. The scale factor compares different segments to each other. The bigger the scale factor, the more “expanded” the segment is. 
+
+I want to emphasize that understanding the scale factor is less important for the Evolving Proteus smart contract because the Evolving Proteus only has one segment, and hence the scale factor is always one (so we don’t include it in the code or the mathematical model)
+
+{Reactions}
+✅ (2) 
+
+[08/22/2023 19:05] castle_chain
+ok , thanks for answering @Kenny @Viraz
+
+
+[08/22/2023 19:05] .satyam_
+@Kenny can i dm u
+
+
+[08/22/2023 19:05] k736
+Yeah sure
+
+
+[08/22/2023 19:06] mrudenko
+@Viraz I've sent you DM
+
+{Reactions}
+👍 
+
+[08/22/2023 19:08] .satyam_
+i'm unable to send u a frnd request!! i think u have to chnge ur setting!!  @Kenny
+
+
+[08/22/2023 19:09] k736
+Ok now try
+
+
+[08/22/2023 19:11] .satyam_
+still getting the same error!
+
+
+[08/22/2023 19:11] k736
+Ok now try
+
+{Reactions}
+👍 
+
+[08/22/2023 19:12] .satyam_
+@Kenny please accept my  request
+
+
+[08/22/2023 19:46] trachev
+Do config.p_min and config.p_max return the price of token x and price of token y for the current timestamp?
+
+
+[08/22/2023 20:29] k736
+Wardens, here is a Desmos model of the bonding curve for Evolving Proteus: https://www.desmos.com/calculator/anuttcbpcu
+
+{Embed}
+https://www.desmos.com/calculator/anuttcbpcu
+Time Evolving Curve Demo
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/anuttcbpcu-B5673.png
+
+{Reactions}
+👍 (6) 
+
+[08/22/2023 20:30] k736
+It shows what is happening geometrically when various parameter are changed. I hope it helps.
+
+
+[08/22/2023 20:36] castle_chain
+@Kenny DMed you
+
+
+[08/22/2023 20:41] trachev
+@Kenny Is this assumption correct?
+
+
+[08/22/2023 20:53] ivand5690
+@Kenny sent you a message
+
+
+[08/22/2023 20:57] k736
+That's a question for @Viraz
+
+
+[08/22/2023 21:48] 0xdeo
+@Kenny dm'd
+
+
+[08/22/2023 22:09] ivand5690
+can someone tell me what `uint256 totalSupply` refers to?
+
+
+[08/23/2023 00:46] viraz4331
+Yes
+
+
+[08/23/2023 01:04] 0xlgtm
+Thanks! This is really helpful to understanding why there are 4 params.
+
+
+[08/23/2023 01:05] 0xlgtm
+From the simulation, I noticed that over time, the price on the y axis goes down and the price on the x axis goes right. Is it possible to reverse it? Or is it only intended to go 1 way?
+
+
+[08/23/2023 01:08] 0xlgtm
+~~Also the MAX_PRICE_VALUE and MIN_PRICE_VALUE are values on the y axis right? i.e. how much x  is worth in terms of y (numeraire token)~~
+Yep, the README states
+> Hence, prices refer to the value of token_x in terms of token_y.
+
+
+[08/23/2023 01:15] k736
+It can go either way. Both can increase. Both can decrease. One can increase and one can decrease.
+
+{Reactions}
+👍 
+
+[08/23/2023 04:21] viraz4331
+The lp token supply
+
+
+[08/23/2023 05:05] viraz4331 (pinned)
+hey wardens,
+there is a small typo in comment here https://github.com/code-423n4/2023-08-shell/blob/c61cf0e01bada04c3d6055acb81f61955ed600aa/src/proteus/EvolvingProteus.sol#L459
+the right comment is 
+```
+`We use FEE_DOWN because we want to decrease the perceived amount of
+ reserve tokens leaving the pool and to decrease the observed amount of LP tokens being burned
+```
+thanks @lsaudit for pointing out
+
+
+[08/23/2023 05:05] plamkata
+What was the invariant of utility related to the lp supply, I am on phone rn but Imma read
+
+
+[08/23/2023 05:06] viraz4331
+here https://discord.com/channels/810916927919620096/1141369345340080209/1143608100704768070
+
+
+[08/23/2023 05:06] plamkata
+Yeah but like, utility = how much LP
+
+
+[08/23/2023 05:06] plamkata
+Or utility IS the LP
+
+
+[08/23/2023 05:07] viraz4331
+no it's a mesasure of the pool value
+
+
+[08/23/2023 05:07] viraz4331
+you can see https://github.com/code-423n4/2023-08-shell/blob/c61cf0e01bada04c3d6055acb81f61955ed600aa/src/proteus/EvolvingProteus.sol#L701
+
+
+[08/23/2023 07:39] k736
+Utility and LP tokens are related but not the same. The % change in utility >= the % change in LP supply, for all transactions
+
+
+[08/23/2023 07:58] 0xhuy0512
+@Kenny pls DM me
+
+
+[08/23/2023 07:58] k736
+No, dm me
+
+
+[08/23/2023 07:58] 0xhuy0512
+I can't lol
+
+
+[08/23/2023 07:58] 0xhuy0512
+accept my FR pls
+
+
+[08/23/2023 08:01] k736
+Done
+
+
+[08/23/2023 10:35] Audinarey#1058
+@Viraz please come clear on this as your current explanation means ```y_init``` and ```x_init``` are the same
+
+
+[08/23/2023 10:37] Audinarey#1058
+Also, @Viraz and @Kenny the documentation says
+```
+int128 p_min_current - the maximum price (at the y asymptote) at the current block
+int128 p_max_current - the minimum price (at the x asymptote) at the current block
+```
+is this correct? or there is a typo error?
+
+
+[08/23/2023 10:57] viraz4331
+no they are not same as mentioned above
+```
+the x_init price in the code is the  the minimum price at the initial block
+the y_init price in the code is the  the max price at the initial block
+```
+whereas 
+```
+int128 p_min_current - the maximum price (at the y asymptote) at the current block
+int128 p_max_current - the minimum price (at the x asymptote) at the current block
+```
+
+
+[08/23/2023 10:57] viraz4331
+this is correct
+
+
+[08/23/2023 10:59] Audinarey#1058
+Thanks
+
+
+[08/23/2023 12:06] 0xlgtm
+hi @Viraz can you check DMs please
+
+
+[08/23/2023 12:15] trachev
+@Viraz How are p_min_init and p_max_init different from p_min_current and p_max_current, so that ``int128 p_max_init: the maximum price at the initial block
+int128 p_min_init: the minimum price at the initial block``
+and ``int128 p_min_current - the maximum price (at the y asymptote) at the current block
+int128 p_max_current - the minimum price (at the x asymptote) at the current block``?
+
+
+[08/23/2023 12:21] viraz4331
+init vars are basically values at the starting block time and current ones are the values computed in a any block b/w the init and the final block so it's real time/instantaneous
+
+
+[08/23/2023 12:22] trachev
+Yes, but why are the current ones inverted, the min_current is the maximum price and max_current is the minimum price?
+
+
+[08/23/2023 12:24] 0xlgtm
+@Kenny sent you a friend request, have a question re. utility.
+
+
+[08/23/2023 12:37] viraz4331
+Oh that might be a typo min current is definitely min price
+
+
+[08/23/2023 12:37] trachev
+Yes, I think that makes more sense
+
+
+[08/23/2023 12:38] viraz4331
+yeah sorry about that the code has the right comment
+
+{Reactions}
+✅ 
+
+[08/23/2023 12:39] trachev
+Thanks for the help
+
+
+[08/23/2023 12:41] hisoul22
+Hi @Viraz , can you please explain the meaning of `xBalance` and `yBalance` in the `swapGivenInputAmount()` function?
+
+
+[08/23/2023 12:42] hisoul22
+Does `xBalance` refer to the balance of token x in the liquidity pool?
+
+
+[08/23/2023 12:42] hisoul22
+Does `yBalance` refer to the balance of token y in the liquidity pool?
+
+
+[08/23/2023 12:42] viraz4331 (pinned)
+Hey wardens,
+small typo in readme
+the min_current is the min price and max_current is the max price
+
+
+[08/23/2023 12:43] hisoul22
+Are you referring to the following part?
+
+
+[08/23/2023 12:43] hisoul22
+int128 p_min_current - the maximum price (at the y asymptote) at the current block
+int128 p_max_current - the minimum price (at the x asymptote) at the current block
+
+
+[08/23/2023 12:59] viraz4331
+Yes it's a typo
+
+
+[08/23/2023 12:59] viraz4331
+Correct definition
+
+
+[08/23/2023 13:00] viraz4331
+Yes x bal is x token bal and y bal is y token bal
+
+
+[08/23/2023 13:01] hisoul22
+thanks
+
+
+[08/23/2023 13:16] trachev
+@Viraz sent a dm
+
+
+[08/23/2023 13:20] viraz4331 (pinned)
+Hey wardens,
+Since lot of people have asked
+The underlying token is first converted to a erc1155 token with 18 decimals so all tokens will conform to that
+
+{Reactions}
+🫡 
+
+[08/23/2023 13:54] tamayonft
+This is super tested contract
+
+
+[08/23/2023 13:55] tamayonft
+Congratulations
+
+{Reactions}
+😀 (2) 
+
+[08/23/2023 14:29] kartoonjoy
+Pinned a message.
+
+
+[08/23/2023 14:47] 0xKarl98#0488
+do we have a doc for this ?
+
+
+[08/23/2023 14:47] 0xKarl98#0488
+or we just read the comment ?
+
+
+[08/23/2023 14:49] hisoul22
+@0xKarl98 https://github.com/code-423n4/2023-08-shell/blob/main/README.md#how-does-the-algorithm-work
+
+
+[08/23/2023 14:50] 0xKarl98#0488
+well thanks mate
+
+
+[08/23/2023 14:53] d4r.k
+Update #3 and https://github.com/code-423n4/2023-08-shell/blob/c61cf0e01bada04c3d6055acb81f61955ed600aa/src/proteus/EvolvingProteus.sol#L697 seem to list the same equation in different form since the placement of `k` is different. Are both of these equations equivalent?
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/image-2-32ADE.png
+
+
+[08/23/2023 14:55] d4r.k
+I tried solving for `u` on both but got different solutions, so unless I interpreted either equation wrong they look different @Kenny @Viraz
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/Capture-A6FC8.PNG
+
+
+[08/23/2023 14:55] d4r.k
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/Capture-64277.PNG
+
+
+[08/23/2023 15:02] Audinarey#1058
+exactly.
+
+
+[08/23/2023 15:07] viraz4331
+seems the comment has the wrong eq @Kenny can u confirm once too
+
+{Reactions}
+👍 
+
+[08/23/2023 15:08] viraz4331 (pinned)
+you can refer to the eq here instead https://github.com/code-423n4/2023-08-shell/blob/main/README.md#how-does-the-algorithm-work
+
+
+[08/23/2023 15:29] hisoul22
+Hi @Viraz. I'm not sure if I'm missing something, but why can the same equation be used to calculate both the maximum and minimum price at the current block?
+
+
+[08/23/2023 15:30] hisoul22
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/Screenshot_2023-08-23_at_23.29.56-EBE39.png
+
+
+[08/23/2023 15:31] viraz4331
+The eq is the same only diff is p_min uses px init and final values and py uses py init and final values
+
+
+[08/23/2023 15:38] j5066
+which section for Analysis can you explain
+
+
+[08/23/2023 15:43] viraz4331
+can you rephrase which analysis are you talking about ?
+
+
+[08/23/2023 15:43] hisoul22
+@Viraz  DMed thanks
+
+{Reactions}
+👍 
+
+[08/23/2023 15:48] j5066
+Analysis awards: $1,500 USDC
+
+
+[08/23/2023 15:49] viraz4331
+I'll check in with the c4a team and get back
+
+
+[08/23/2023 15:53] thebrittfactor
+Hey @JCK - can you further explain your question? If this is in regards to the total award pool ($1,500 USDC), this will be split between the analysis reports chosen for awards
+
+{Reactions}
+thankyou (2) 
+
+[08/23/2023 15:54] j5066
+which section of they protocol is for Analysis
+
+
+[08/23/2023 15:57] thebrittfactor
+Analysis reports are essentially your personal review of the codebase as a whole. Hopefully this will help explain:
+https://code4rena.notion.site/Analyses-Guidelines-and-FAQ-2808a71e08e44c81a985527194f5f118?pvs=4
+
+{Reactions}
+🎉 
+
+[08/23/2023 16:00] 0xpanicerror
+Hey @Viraz 
+DM'd you with a question can you check?
+
+{Reactions}
+👍 
+
+[08/23/2023 16:09] 0xkazimm
+hey @Viraz can you please pin all typos and incorrect comments/details in docs ? this way we can refers to it and understand the codebase in the right way. 
+
+thanks a lot
+
+
+[08/23/2023 16:11] viraz4331
+We aren't allowed to make commits to the code during the contest so let me pin the typo messages here there were 3
+
+{Reactions}
+👍🏻 (2) 
+
+[08/23/2023 16:43] kartoonjoy
+Pinned a message.
+
+
+[08/23/2023 16:43] kartoonjoy
+Pinned a message.
+
+
+[08/23/2023 16:43] kartoonjoy
+Pinned a message.
+
+
+[08/23/2023 16:44] kartoonjoy
+Pinned a message.
+
+
+[08/23/2023 16:52] 0xprinc
+Is `p_min` same as `p_y` everywhere
+
+
+[08/23/2023 16:52] 0xprinc
+?
+
+
+[08/23/2023 16:54] 0xprinc
+I am confused with the declaration of config struct which uses px and py but the readme have p_max and p_min
+
+
+[08/23/2023 16:56] 0xkazimm
+Thank you sir, i mean to pin it here too, thanks again 🙏🏻
+
+
+[08/23/2023 16:57] viraz4331
+it is pinned now
+
+{Reactions}
+👍🏻 (2) 
+
+[08/23/2023 16:57] 0xkazimm
+🫡🫡
+
+
+[08/23/2023 16:58] viraz4331
+no please check here https://discord.com/channels/810916927919620096/1141369345340080209/1143888030411784353
+
+
+[08/23/2023 16:59] viraz4331
+```
+int128 p_max_init: the maximum price at the initial block same as py_init
+int128 p_min_init: the minimum price at the initial block same as px_init
+```
+
+
+[08/23/2023 17:03] 0xprinc
+so p_max can be interpreted as p_y always? whether init or current or final
+and similiar to the x
+
+
+[08/23/2023 17:15] viraz4331
+yes the only difference is the time factor init and final are initial and final block values and current is value at the current block
+
+{Reactions}
+👍🏻 
+
+[08/23/2023 17:23] viraz4331 (pinned)
+Hey wardens,
+there is a small typo in comment here https://github.com/code-423n4/2023-08-shell/blob/main/src/proteus/EvolvingProteus.sol#L173
+instead of 10^12 it should be 10^10 since the min price value is 10^-8
+
+{Reactions}
+👍🏻 
+
+[08/23/2023 17:24] kartoonjoy
+Pinned a message.
+
+
+[08/23/2023 20:22] k736
+In the case of evolving proteus, the value of `k` is always `1`. We use `k` in static Proteus (the white paper is linked in the readme). In the case of static proteus, we have multiple slices. We need the `k` term to compare utility between slices. However, in evolving proteus, we only ever have one slice and hence do not need to include `k` in the math operations of the smart contract. Arguably, we should remove `k` from the comments in the .sol contract since it is no longer relevant.
+
+{Reactions}
+👍 (7) 
+
+[08/23/2023 20:27] d4r.k
+Appreciate the detailed response. Sent a friend request
+
+{Reactions}
+👍 
+
+[08/23/2023 20:29] Audinarey#1058
+Kindly accept my friend request so I can DM you. @Kenny
+
+{Reactions}
+👍 
+
+[08/23/2023 22:52] Audinarey#1058
+I sent you a DM @Kenny
+
+
+[08/24/2023 08:06] kawaicho
+@Kenny accept my friend request
+
+
+[08/24/2023 08:07] viraz4331
+you can ask me if it's urgent since he is in us timezone
+
+
+[08/24/2023 10:32] 0xhuy0512
+@Viraz DM sent
+
+
+[08/24/2023 11:19] markusk0x
+@Viraz, @Kenny, friend request send
+
+
+[08/24/2023 11:24] 7a4raf
+does swapGivenInputAmount method does the actual swapping, or only calculate the output amount ?
+
+
+[08/24/2023 11:34] viraz4331
+it only computes the output amount
+
+
+[08/24/2023 11:35] 7a4raf
+does the contract contain the logic of swapping?
+I mean does the contract have functional logic or onl computational ones?
+
+
+[08/24/2023 11:35] 7a4raf
+sorry
+beginner here
+
+
+[08/24/2023 11:38] 7a4raf
+also, I am still new to this, can you provide any resources to learn more about the functionality of the contract in the context of de-fi?
+thanks alot for your help
+
+
+[08/24/2023 11:38] viraz4331
+computational logic only
+
+
+[08/24/2023 11:38] viraz4331
+no need to be sorry these are good ques to ask 🙂
+
+{Reactions}
+❤️ 
+
+[08/24/2023 11:39] viraz4331
+it's an amm with a evolving bonding curve you can go through the readme for specific info and amm info is available all over the internet
+
+{Reactions}
+❤️ 
+
+[08/24/2023 11:40] 7a4raf
+excellent
+thank you
+
+
+[08/24/2023 11:46] fulum
+I think this part can help you https://shell-protocol.notion.site/Proteus-AMM-Engine-Update-3-7f33b7e1561347b696874a8ba02b9782
+
+{Embed}
+https://shell-protocol.notion.site/Proteus-AMM-Engine-Update-3-7f33b7e1561347b696874a8ba02b9782
+Proteus AMM Engine: Update #3
+Introduction
+
+{Reactions}
+❤️ 👍 
+
+[08/24/2023 11:51] 7a4raf
+awesome, thanks
+
+
+[08/24/2023 11:56] viraz4331
+this is our amm version which is live right now
+
+
+[08/24/2023 11:59] fulum
+to be sure, EvolvingProteus work with this logic ?
+
+
+[08/24/2023 12:01] viraz4331
+the kappa mentioned here is 1 https://discord.com/channels/810916927919620096/1141369345340080209/1144003780430536744
+
+
+[08/24/2023 12:01] viraz4331
+would prefer you go through the readme
+
+
+[08/24/2023 12:02] fulum
+ok thanks :chefskiss:
+
+
+[08/24/2023 12:49] 0xprinc
+what is  `si` and `sf` in `_getUtilityFinalLp()` function?
+
+
+[08/24/2023 13:42] .satyam_
+si = lp supply at the start of the tx and sf =  lp supply at the endof the tx
+
+{Reactions}
+👍 
+
+[08/24/2023 13:54] fulum
+Dm you @Viraz
+
+{Reactions}
+👍 
+
+[08/24/2023 16:02] viraz4331 (pinned)
+hey wardens,
+there is a small typo in the readme
+instead of 
+`InvalidPrice - The x_init/final price cannot be less than y_init/final`
+
+correct version is 
+`InvalidPrice - The y_init/final price cannot be less than x_init/final`
+
+
+[08/24/2023 16:05] kartoonjoy
+Pinned a message.
+
+
+[08/24/2023 18:40] 0xkazimm
+is these lines contains typo too ?
+```
+int128 p_min_current - the maximum price (at the y asymptote) at the current block
+int128 p_max_current - the minimum price (at the x asymptote) at the current block
+```
+
+
+[08/24/2023 18:45] fulum
+Yes Viraz correct here https://discord.com/channels/810916927919620096/1141369345340080209/1143892230025793760
+
+{Reactions}
+❤️ 
+
+[08/24/2023 18:46] 0xkazimm
+thanks sir
+
+
+[08/24/2023 18:47] viraz4331
+yes please check the pinned messages
+
+{Reactions}
+👍🏻 
+
+[08/24/2023 18:47] viraz4331
+all typo messages have been pinned
+
+{Reactions}
+🙏🏻 
+
+[08/24/2023 18:53] 0xkazimm
+it mentioned that the 6 function will be called in the ocean contract, but they do not called via the ocean contract, can i know why please ?
+
+
+[08/24/2023 18:54] 0xkazimm
+i understand that users will never interact with the evolving contract:
+`All interactions of the user with the user with the evolving proteus contract happen through the Ocean`
+
+
+[08/24/2023 19:00] viraz4331
+the ocean calls liquidity proxy which calls the evolving proteus contract
+
+
+[08/24/2023 19:01] 0xkazimm
+can you please send the repo of the proxy that call the evolving contract ?
+
+
+[08/24/2023 19:17] viraz4331
+it's in the same repo https://github.com/code-423n4/2023-08-shell/blob/main/src/proteus/LiquidityPoolProxy.sol but the contract is out of scope for the audit
+
+
+[08/24/2023 19:18] 0xkazimm
+thanks a lot sir
+
+{Reactions}
+👍 
+
+[08/24/2023 20:26] 0xkazimm
+i'm a bit confused about these lines, can someone tell me why we say it should have 10e8 for each x and for each y ?
+```
+/** 
+     @notice 
+     The maximum slope (balance of y reserve) / (balance of x reserve)
+     This limits the pool to having at most 10**8 y for each x.
+    */
+    int128 constant MAX_M = 0x5f5e1000000000000000000;
+    /** 
+     @notice 
+     The minimum slope (balance of y reserve) / (balance of x reserve)
+     This limits the pool to having at most 10**8 x for each y.
+    */
+    int128 constant MIN_M = 0x00000000000002af31dc461;
+
+
+```
+
+
+[08/24/2023 20:31] molecula451
+18 decimals
+
+
+[08/24/2023 20:31] 0xkazimm
+!!
+
+
+[08/24/2023 20:38] 0xkazimm
+did this refers to the quanitiy that each token y should have for token x and visa verse or its the price ?
+
+
+[08/24/2023 21:01] ryanjshaw
+I get 10^9 y for x and 10^6 x for y so I'm probably confused 🙂
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/image-475BE.png
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/image-8E19C.png
+
+{Reactions}
+😵‍💫 
+
+[08/24/2023 22:45] ihtishamsudo
+got the same thing and confused about this one
+
+
+[08/25/2023 01:39] 0xlgtm
+the MAX_M and MIN_M is there to control the ratio between token x and token y. For MAX_M, it says at most 10^8 y for each x whereas for MIN_M it says at most 10^8 **x for each y** (it's flipped) i.e. at most 1/10^8 y for each x.
+
+
+[08/25/2023 01:41] 0xlgtm
+A numerical example would be a pool having 1 x and 10^8 y. This would hit the MAX_M limit. A pool with 10^8 x and 1 y will hit the MIN_M limit.
+
+
+[08/25/2023 04:46] viraz4331
+the quantity
+
+
+[08/25/2023 04:53] 0xprinc
+lp supply means the number of y tokens?
+
+
+[08/25/2023 04:54] viraz4331
+The values are in 64x64 form hence it is this way
+
+{Reactions}
+👍 
+
+[08/25/2023 04:54] viraz4331
+The no of lp tokens
+
+
+[08/25/2023 09:36] hunter_w3b
+@Viraz can I dm?
+
+
+[08/25/2023 09:38] viraz4331
+yes please
+
+
+[08/25/2023 11:40] superman_i4g
+Anyone have any idea how I can fix this?
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/IMG_1726-73499.jpg
+
+
+[08/25/2023 11:50] fulum
+use "yarn install" or "yarn i" to install the nodemodules path (install yarn or npm if you don't have), and be sure to install forge
+
+
+[08/25/2023 11:55] superman_i4g
+Yarn not recognized
+
+
+[08/25/2023 11:56] fulum
+install yarn, you have multiple tutorial on the web
+
+
+[08/25/2023 11:57] fulum
+I think you can use classical "npm" if you have it
+
+
+[08/25/2023 11:57] superman_i4g
+Alright, I’m installing npm now
+
+{Reactions}
+👍 (2) 
+
+[08/25/2023 13:49] viraz4331
+Hey wardens,
+There have been a lot of queries around how the fee mechanism works here is a detailed explanation by @Ish
+
+
+[08/25/2023 13:49] viraz4331 (pinned)
+The fee is applied twice in every swap/deposit/withdraw, first it is applied to the amount that the user specifies and then at the end to the resulting amount of the operation. The fee is applied by either increasing or decreasing the amount, depending on the situation. 
+
+When the specified amount is a value that the user is giving up (swapGivenInputAmount, depositGivenInputAmount, or withdrawGivenInputAmount), the fee is applied down. This means that we are basically telling the pool that the specified inputAmount is LESS than what the user actually specified, and we also take a fee on the resulting output amount that the user receives. 
+
+Example: User wants to swap 1 X for Y, apply first fee to make it 0.99X, compute Y output (let's say its 0.99Y), then apply second fee to make it 0.98Y
+
+The opposite occurs when the specified value is what the user wants to receive (swapGivenOutputAmount, depositGivenOutputAmount, withdrawGivenOutputAmount).
+
+Example: User wants to swap X for 1 Y, apply first fee to make it 1.01Y, compute X input (let's say its 1.01X), then apply second fee to make it 1.02X
+
+ There are two components to the fee, `BASE_FEE` and `FIXED_FEE`. `BASE_FEE` is the basis point percentage that the amounts are increased/decreased by, and `FIXED_FEE` is a static number that is added/subtracted in order to alleviate precision issues
+
+{Reactions}
+👍🏻 (11) 👍 
+
+[08/25/2023 14:30] windhustler
+@Kenny Trying to DM, please accept my fr
+
+
+[08/25/2023 14:32] viraz4331
+You can DM me if urgent
+
+
+[08/25/2023 15:05] itsmetechjay
+Pinned a message.
+
+
+[08/26/2023 07:56] viraz4331 (pinned)
+hey wardens,
+there has been some confusion around the `BASE_FEE = 800`  in the comment it is mentioned as roughly 25 bps which is correct 
+
+In the fee rounding method
+base_fee is applied as `absolute_amount / base_fee`  and it is applied twice so it is almost 25 bps and the final fee amount depends on the absolute_amount
+
+
+[08/26/2023 08:06] superman_i4g
+Installed yarn and now getting some kinda compiler error. I think I will have to try import the file again and run forge build
+
+
+[08/26/2023 09:12] debofx
+Also have a look on github for download of node_modules folder which has openzeppelin etc.
+
+
+[08/26/2023 09:21] superman_i4g
+Yea, might just prefer using Remix since it’s compiling on there.
+
+
+[08/26/2023 10:06] dev0cloo
+I had the same error. Fixed it by running `npm install` and then running `forge build` and it compiled successfully. Hope that helps!
+
+
+[08/26/2023 10:45] superman_i4g
+Tried it already, not working. It’s compiling on Remix so I am just gonna go with it.
+
+
+[08/26/2023 13:18] itsmetechjay
+Pinned a message.
+
+
+[08/26/2023 16:42] debofx
+Ok. In VS Code, I always have a routine to configure remappings.txt and yarn add openzeppelin, etc and git clone forge-std, DS-Test for foundry.
+
+
+[08/26/2023 16:54] superman_i4g
+I have one too. Just that this time around remappings.text was not included only yarn
+
+
+[08/26/2023 16:56] debofx
+Also, I just heard about a new website or tool called auditwizard io which is also good, but could not compile the inscope contract on there. You can use slither on there for most of the competitions though.
+
+
+[08/26/2023 16:57] superman_i4g
+Yes, audit wizard is good. Just needs more improvement. Although that’s just the beta. Perhaps the full version will be more polished
+
+{Reactions}
+👍 (2) 
+
+[08/26/2023 19:08] debofx
+I used cmd touch remappings.txt to add it.
+
+{Reactions}
+✅ 
+
+[08/26/2023 21:11] maxwell#4426
+Does the liquidity pool take all kinds of tokens?
+
+
+[08/27/2023 03:18] viraz4331
+All tokens including  nfts are first wrapped into erc1155 tokens  by the ocean after that all tokens are 18 decimals and the evolving proteus does computation for those tokens
+
+
+[08/27/2023 12:42] superman_i4g
+I must admit, this codebase is well structured. It’s almost impossible to find any vulnerabilities apart from the known ones😮‍💨
+Kudos to the team👏🏽
+
+{Reactions}
+❤️ (7) 
+
+[08/27/2023 19:20] rolezn
+submission is broken or is it just me?
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/image-7DC3C.png
+
+
+[08/27/2023 19:38] fulum
+submission work for me, try another browser
+
+
+[08/27/2023 20:07] debofx
+Try and search (ctrl + f) the file for vulnerabilities. Because scans sometimes do not pick them up.
+
+
+[08/27/2023 20:10] superman_i4g
+I hardly relay on scans
+I prefer manually going through hoping to find something than rely on a tool.
+
+
+[08/27/2023 21:47] Audinarey#1058
+code4rena is down. Moderators kindly wade in
+
+
+[08/27/2023 21:52] Audinarey#1058
+you're not alone
+
+
+[08/28/2023 09:33] prapandey031
+@Viraz pls check DM
+
+{Reactions}
+👍 
+
+[08/28/2023 11:00] oxtenma
+@Viraz accept the fr please.
+
+{Reactions}
+👍 
+
+[08/28/2023 20:02] C4
+**🚨 AUDIT ALERT**
+
+@🐺wardens The **Shell Protocol** audit is now closed! Huge thanks to everyone who participated 🔍, whether you submitted a finding or not.
+
+What's next: The sponsor team and judge will review the findings over the next couple of weeks. Keep an eye on #📢announcements for regular updates on how the audit is progressing through awarding 🤑🏆, judging 🧑‍⚖️ and reporting 📜. Feel free to ping a Contest-Admin if you have questions along the way!
+
+{Reactions}
+🚀 (8) 
+
+[08/28/2023 20:37] fulum
+Thanks to @Viraz and Shell team, very helpful.
+Very solid contract :chefskiss:
+
+{Reactions}
+❤️ (2) 
+
+[08/29/2023 05:59] 0x11singh99
+Any backstage how many submissions were there ?
+
+
+[08/29/2023 06:27] bytes032
+274
+
+{Reactions}
+thankyou (7) 
+
+[09/12/2023 06:32] viraz4331
+what do you mean ?
+
+
+[09/12/2023 13:01] dwward3n
+Oh my bad
+
+
+[09/16/2023 16:02] thank_you_
+Any chance we can confirm that payments will be sent out via Polygon network?
+
+
+[09/16/2023 17:52] topmark1
+Yea it is polygon
+
+
+[09/17/2023 09:37] 0x11singh99
+when we can expect results ?
+
+
+[09/17/2023 09:38] pfapostol
+should be soon
+
+
+[09/17/2023 09:39] pfapostol
+Escalation Ended
+
+
+[09/17/2023 11:11] ihtishamsudo
+@PaperParachute | C4  will be here soon with "IT'S INCOMINGGGG" gif lol
+
+
+[09/18/2023 12:20] lsaudit
+any chance for getting results today/tomorrow?
+
+
+[09/18/2023 13:28] _paperparachute
+https://tenor.com/view/excited-happy-shaq-today-dance-gif-14652418
+
+{Embed}
+https://tenor.com/view/excited-happy-shaq-today-dance-gif-14652418
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/excited-happy-EBA3F.png
+
+{Reactions}
+hi5 (2) 🔥 (3) 
+
+[09/18/2023 13:32] hunter_w3b
+https://tenor.com/view/alright-then-kevin-hart-nodding-gif-9852215
+
+{Embed}
+https://tenor.com/view/alright-then-kevin-hart-nodding-gif-9852215
+alright then
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/alright-then-kevin-hart-A851D.png
+
+
+[09/18/2023 14:14] shubh0412
+Rewards are gonna be like.....
+
+
+[09/18/2023 14:14] shubh0412
+https://tenor.com/view/counting-money-shmoney-gif-24675954
+
+{Embed}
+https://tenor.com/view/counting-money-shmoney-gif-24675954
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/counting-money-B7EC2.png
+
+{Reactions}
+😂 (8) 
+
+[09/18/2023 19:28] uncle Jeff#4407
+https://tenor.com/view/alone-gif-22316343
+
+{Embed}
+https://tenor.com/view/alone-gif-22316343
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/alone-A6879.png
+
+
+[09/18/2023 19:32] shubh0412
+His today is diff from yrs today 😂
+
+
+[09/18/2023 19:33] uncle Jeff#4407
+im starting to think that they might be living in the future
+
+
+[09/18/2023 19:35] uncle Jeff#4407
+I saw 👁️
+
+
+[09/18/2023 19:36] shubh0412
+I think the results are being typed...
+
+
+[09/18/2023 19:37] uncle Jeff#4407
+we're being tortured lol
+
+
+[09/18/2023 19:38] shubh0412
+U r 😂
+
+
+[09/18/2023 19:41] _paperparachute
+🤑 🎉  Awards for **Shell**:
+
+$2,522.83 USDC » @Deleted User 
+$2,307.52 USDC » @Udsen 
+$2,181.10 USDC » @oakcobalt 
+$2,030.84 USDC » @prapandey031
+$1,965.21 USDC » @pontifex  
+$1,942.75 USDC » @Testerbot 
+$1,933.59 USDC » @T1MOH 
+$1,933.59 USDC » @mert_eren 
+$1,933.59 USDC » @markus_ether 
+$1,933.59 USDC » @comradeKtg 
+$1,933.59 USDC » @ItsNio 
+$1,933.59 USDC » @d3e4 
+$966.80 USDC » @skodi  
+$441.46 USDC » @0xSmartContract 
+$381.53 USDC » @lsaudit 
+$315.93 USDC » @MrPotatoMagic 
+$247.50 USDC » @ihtishamsudo 
+$247.50 USDC » @0xcatellatech 
+$97.25 USDC » @MohammedRizwan 
+$53.83 USDC » @pfapostol 
+$40.53 USDC » @0xmystery 
+$40.53 USDC » plainshift (@surya, @thank_you, @windhustler) 
+$31.61 USDC » @0xSmartContractSamurai 
+$31.37 USDC » @moneyversed 
+$31.37 USDC » @rjs 
+$31.37 USDC » @carrotsmuggler 
+$22.46 USDC » @epistkr 
+$22.46 USDC » @Jorgect 
+$22.46 USDC » @Sathish9098 
+$22.46 USDC » @anon
+$22.46 USDC » @0x11singh99 
+$22.46 USDC » @0xhacksmithh  
+$22.46 USDC » @0xAnah 
+$9.16 USDC » @chainsnake 
+$9.16 USDC » MatricksDeCoder
+$9.16 USDC » @nisedo  
+$9.16 USDC » @ast3ros 
+$9.16 USDC » @Shubham 
+$9.16 USDC » @Rolezn 
+$9.16 USDC » @Olanrewaju 
+$9.16 USDC » @Fulum 
+$9.16 USDC » @0xprinc 
+
+🏁 Findings summary
+--------------------------------------—
+High risk findings: 1 unique (14 total) 
+Med risk findings: 0
+Gas reports: 13 (Best: @lsaudit)
+QA reports: 21 (Best: @Udsen)
+Advanced analysis reports: 11 (Best: @0xSmartContract)
+
+Awards will be distributed on Polygon within the next week. Congratulations all!  💸 💸 💸
+
+*Note: If you participated in this audit and don’t see your name on this list, please wait until the report is published and the findings repo is made public to check on your submissions.*
+
+{Reactions}
+🎉 (15) 
+
+[09/18/2023 19:42] _paperparachute
+https://tenor.com/view/precisely-on-schedule-right-on-schedule-right-on-time-shocked-good-timing-gif-16489616
+
+{Embed}
+https://tenor.com/view/precisely-on-schedule-right-on-schedule-right-on-time-shocked-good-timing-gif-16489616
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/precisely-on-schedule-right-on-schedule-CD226.png
+
+{Reactions}
+🤣 (3) 
+
+[09/18/2023 19:54] lsaudit
+first best gas report, yay! 🥳
+
+{Reactions}
+🎉 (4) 
+
+[09/18/2023 19:55] viraz4331
+Thanks a lot guys for participating in the audit  ❤️ 🫡 
+cheers 🙂
+
+{Reactions}
+10_10 (7) 
+
+[09/18/2023 19:56] fulum
+No awards for Analysis?
+
+{Reactions}
+👍🏻 (2) 
+
+[09/18/2023 20:05] _paperparachute
+Thanks! I've added that information.
+
+{Reactions}
+🙏 (2) 
+
+[09/18/2023 20:07] olanre_waju
+that was a medium severity finding that deserves a reward!:10_10:
+
+
+[09/18/2023 20:08] _paperparachute
+The reward is my heartfelt appreciation for raising it 🙂
+
+{Reactions}
+❤️ 
+
+[09/18/2023 20:23] saq_143
+https://tenor.com/view/schol-no-stressed-problematic-head-bang-gif-15028989452394274842
+
+{Embed}
+https://tenor.com/view/schol-no-stressed-problematic-head-bang-gif-15028989452394274842
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/schol-no-313B8.png
+
+{Reactions}
+😂 (4) 🤝 (2) 😞 
+
+[09/18/2023 20:27] uncle Jeff#4407
+same buddy same
+
+
+[09/18/2023 20:28] uncle Jeff#4407
+mission failed we'll get it next time
+
+
+[09/18/2023 20:41] zabihullahazadzoi
+https://tenor.com/view/sad-walk-gif-24718162
+
+{Embed}
+https://tenor.com/view/sad-walk-gif-24718162
+Code4rena - ARCHIVE-Q3-2023 - shell-aug21 [1141369345340080209].txt_Files/sad-walk-0D759.png
+
+{Reactions}
+😆 (2) 
+
+[09/18/2023 23:38] Cryptor#9119
+Only one bug?
+
+
+[09/19/2023 01:33] .testerbot
+Let's go!!!
+
+
+[09/19/2023 02:58] 0x11singh99
+Why 1 out of 14  got 0 doller for same high finding ?
+
+
+[09/19/2023 02:58] .satyam_
+@prapandey031 you made it
+
+
+[09/19/2023 03:01] prapandey031
+Thanks 🙏
+
+
+[09/19/2023 11:01] t1moh
+As I see some duplicated reports are from the same wardens, only unique 12 wardens submitted it
+
+{Reactions}
+👀 
+
+[09/20/2023 12:33] 0xhelium
+So there is basically no escalation on C4 ?
+
+
+[09/20/2023 13:11] cloudellie
+backstage wardens can request a judge's review during the post-judging QA phase: https://docs.code4rena.com/awarding/fairness-and-validity#if-you-disagree-with-a-judges-decision
+
+{Embed}
+https://docs.code4rena.com/awarding/fairness-and-validity
+Fairness and validity
+
+
+[10/05/2023 20:43] visualbits
+The report of this contest proved to us again that the critical bugs are often in the simplest parts of the code.
+High fives to all wardens who submitted H-01 🙌
+
+
+[10/12/2023 21:02] mike_bello90
+guys I'm reading the report and i got a question
+
+
+[10/12/2023 21:03] mike_bello90
+why 2 issues that  were reporting the same bug are judge differently, one was paid as a high and the other was paid as QA 🤔
+
+
+[10/12/2023 21:04] mike_bello90
+I'm trying to understand the guidelines for reports
+
+
+[10/12/2023 21:04] mike_bello90
+https://github.com/code-423n4/2023-08-shell-findings/issues/205 / https://github.com/code-423n4/2023-08-shell-findings/issues/268
+
+
+[10/15/2023 14:45] c145h
+oh, they're indeed same
+
+
+[10/15/2023 16:29] _paperparachute
+If you take a look at [this](https://github.com/code-423n4/2023-08-shell-findings/issues/191) finding, found by the same warden as #205, it should give some insight into how the two are different (Because the warden wouldn't submit two issues for one finding)
+
+
+[10/16/2023 07:58] c145h
+Thanks a lot for your kind explanations. Thank you PaperParachute
+
+
+==============================================================
+Exported 356 message(s)
+==============================================================
