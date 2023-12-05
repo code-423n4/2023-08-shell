@@ -1,18 +1,38 @@
 # Shell Protocol audit details
-- Total Prize Pool: $36,500 USDC (Notion: Total award pool)
-  - HM awards: $24,750 USDC (Notion: HM (main) pool)
-  - Analysis awards: $1,500 USDC (Notion: Analysis pool)
-  - QA awards: $750 USDC (Notion: QA pool)
-  - Bot Race awards: $2,250 USDC (Notion: Bot Race pool)
-  - Gas awards: $750 USDC (Notion: Gas pool)
-  - Judge awards: $3,600 USDC (Notion: Judge Fee)
-  - Lookout awards: $2,400 USDC (Notion: Sum of Pre-sort fee + Pre-sort early bonus)
-  - Scout awards: $500 USDC (Notion: Scout fee - but usually $500 USDC)
+- Total Prize Pool: $36,500 USDC 
+  - HM awards: $24,750 USDC 
+  - Analysis awards: $1,500 USDC 
+  - QA awards: $750 USDC 
+  - Bot Race awards: $2,250 USDC 
+  - Gas awards: $750 USDC 
+  - Judge awards: $3,600 USDC 
+  - Lookout awards: $2,400 USDC 
+  - Scout awards: $500 USDC 
 - Join [C4 Discord](https://discord.gg/code4rena) to register
 - Submit findings [using the C4 form](https://code4rena.com/contests/2023-08-shell-protocol/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
 - Starts August 21, 2023 20:00 UTC
-- Ends August 28, 2023 20:00 UTC 
+- Ends August 28, 2023 20:00 UTC
+
+## Automated Findings / Publicly Known Issues
+
+Automated findings output for the audit can be found [here](https://github.com/code-423n4/2023-08-shell/blob/main/bot-report.md) within 24 hours of audit opening.
+
+*Note for C4 wardens: Anything included in the automated findings output is considered a publicly known issue and is ineligible for awards.*
+
+### Known behaviors which are out of scope for the audit(automated findings / publicly known issues)
+
+* Errors already described
+  * Failure when deploying a pool with incorrect prices (see above)
+  * any findings around "permissionless" deployment, although contract deployment is permissionless but in the near/distant future only the shell team will deploy this contract
+  * BoundaryError
+  * AmountError
+  * CurveError
+  * BalanceError
+  * Utility per LP token decreases between timeslices
+  * Failure on try/catch unit tests
+  * Failure of soft invariants (see above), especially those where the user is expected to net more tokens than they started with, but don’t.
+
 
 # Scope
 
@@ -141,18 +161,6 @@ These invariants concern the behavior of the pool between timeslices. What happe
 
 Note: when the min and max prices are evolving in opposite directions, we are unable to specify the expected behavior. The user executing the swap can either end up with more or fewer tokens than they started with.
 
-## Known behaviors which are out of scope for the audit(automated findings / publicly known issues)
-
-* Errors already described
-  * Failure when deploying a pool with incorrect prices (see above)
-  * BoundaryError
-  * AmountError
-  * CurveError
-  * BalanceError
-* Utility per LP token decreases between timeslices
-* Failure on try/catch unit tests
-* Failure of soft invariants (see above), especially those where the user is expected to net more tokens than they started with, but don’t.
-
 
 ## Architecture
 All interactions of the user with the user with the evolving proteus contract happen through the **Ocean** which is our accounting layer, the ocean related contracts are out of scope for this audit but you can find more details [here](https://wiki.shellprotocol.io/how-shell-works/the-ocean-accounting-hub)
@@ -164,6 +172,30 @@ Evolving Proteus has 6 methods that are called via the ocean:
 * `depositGivenOutputAmount` computes the amount of pool reserve tokens to be deposited when the desired lp amount is provided
 * `withdrawGivenOutputAmount` computes the amount of lp tokens to be burnt when reserve token amount is provided
 * `withdrawGivenInputAmount` computes the amount of reserve tokens to be sent to the user when amount of lp tokens to burn is provided
+
+## Scoping Details 
+```
+- If you have a public code repo, please share it here:  https://github.com/Shell-Protocol/Shell-Protocol
+- How many contracts are in scope?:  1 
+- Total SLoC for these contracts?:  458
+- How many external imports are there?: 1  
+- How many separate interfaces and struct definitions are there for the contracts within scope?:  1
+- Does most of your code generally use composition or inheritance?:   Composition
+- How many external calls?:   0
+- What is the overall line coverage percentage provided by your tests?:  99%
+- Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?:   True
+- Please describe required context:   The contract we want to get audited is a amm primitive & https://wiki.shellprotocol.io/how-shell-works/the-ocean-accounting-hub is our accounting layer which is already audited before and is out of scope for this audit maintains accounting for all primitives we have so all the swaps for eg are initiated through the ocean contract and then the flow at the end goes to the primitive that we want to get audited for the computation
+- Does it use an oracle?:  No
+- Does the token conform to the ERC20 standard?:  
+- Are there any novel or unique curve logic or mathematical models?: The amm primitive we want to get audited is a time evolving bonding curve so we set the price ranges on x & y axis depending on how the curve will evolve and a duration till which the curve will evolve over time. Curve evolution is accomplished through linear interpolation of the parameters with respect to time. The evolving parameters are "a" and "b", which determine the horizontal and vertical translation of the curve, respectively. Parameters "a" and "b" can be derived from points along the curve; as long as the price(derivative) of a curve is known, they are easy to calculate with basic arithmetic.  The current high and low prices determine the liquidity concentration for the current block and hence the swap rates. The current prices are calculated according to this formula:      p_current = p_initial*(1-T) + p_final*(T) T = (T_current - T_initial) / (T_final - T_initial) & a, b are respective calculated with the following equations b = px(self).sqrt() & a = (py(self).inv()).sqrt() where px and py are instantaneous price points at a specific time during the curve evolution
+- Does it use a timelock function?:  
+- Is it an NFT?: 
+- Does it have an AMM?:   True
+- Is it a fork of a popular project?: False
+- Which blockchains will this code be deployed to, and are considered in scope for this audit?: Arbitrum
+- Areas to focus on/break: main areas would be if the computation logic of the primitive can be broken and taken advantage of terms of swaps, deposits & withdrawals or any scenario in terms of the computation where funds get stuck etc
+- In the event of a DOS, could you outline a minimum duration after which you would consider a finding to be valid? This question is asked in the context of most systems' capacity to handle DoS attacks gracefully for a certain period: 1-2 days
+```
 
 ## Testing
 The tests are located [here](https://github.com/code-423n4/2023-08-shell/tree/main/src/test)
@@ -182,11 +214,9 @@ forge test
 ## Coverage
 ```shell
 forge coverage
-```
 
-<img width="983" alt="Screenshot 2023-08-17 at 9 07 41 PM" src="https://github.com/cowri/shell-protocol-v2-contracts/assets/26670962/18f84132-9d41-48dd-9d8b-f899cbb6cd3f">
-<br>
-<img width="1022" alt="Screenshot 2023-08-17 at 9 05 36 PM" src="https://github.com/cowri/shell-protocol-v2-contracts/assets/26670962/fd7c3302-ccb5-4109-ba20-a6b31fb0cd42">
+Only check coverage for EvolvingProteus.sol
+```
 
 
 ## Static Analysis
